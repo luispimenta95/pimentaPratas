@@ -10,7 +10,7 @@ mysqli_set_charset($conn, 'utf8');
 $pagina = (isset($_GET['pagina'])) ? $_GET['pagina'] : 1;
 $pagina_atual = "produto.php";
 //Selecionar todos os logs da tabela
-$pesquisaProdutos = "SELECT nomeProduto from produto p order by p.nomeProduto";
+$pesquisaProdutos = "SELECT nomeProduto from produto pr";
 $Produtos = mysqli_query($conn, $pesquisaProdutos);
 
 //Contar o total de logs
@@ -32,38 +32,40 @@ if (isset($_POST['todos'])) {
     $listaTodos = "select 
     idProduto,
     nomeProduto,
-    codigo,
-    imagem,
     ativo , 
     dataCadastro,
-    unidade,
-    precoAtacado,
-    precoDelivery,
+    precoProduto,
     estoque,
+    nomeCategoria,
     dataCadastro 
     from 
-    produto p order by p.nomeProduto";
+    produto p inner join categoriaProduto c on p.categoriaProduto = c.idCategoria order by p.nomeProduto";
 }
 if (!isset($_POST['termo'])) {
     $pesquisaProdutos = "select 
     idProduto,
     nomeProduto,
-    codigo,
-    imagem,
     ativo , 
     dataCadastro,
-    unidade,
-    precoAtacado,
-    precoDelivery,
+    precoProduto,
     estoque,
+    nomeCategoria,
     dataCadastro 
     from 
-    produto p order by p.nomeProduto limit $incio, $quantidade_pg";
+    produto p inner join categoriaProduto c on p.categoriaProduto = c.idCategoria order by p.nomeProduto limit $incio, $quantidade_pg";
 } else {
     $pesquisa = $_POST["termo"];
 
-    $pesquisaProdutos = "select idProduto, nomeProduto, codigo, imagem, ativo, dataCadastro, unidade, precoAtacado,precoDelivery, estoque 
-    from produto p WHERE p.nomeProduto LIKE '%" . $pesquisa . "%'";
+    $pesquisaProdutos = "select 
+    idProduto,
+     nomeProduto,
+     ativo,
+    dataCadastro,
+    precoProduto, 
+    estoque,
+    nomeCategoria
+    from produto p inner join categoriaProduto c on p.categoriaProduto = c.idCategoria
+      WHERE p.nomeProduto LIKE '%" . $pesquisa . "%'";
 }
 if ($pesquisa == "todos") {
     $pesquisaProdutos = $listaTodos;
@@ -185,19 +187,17 @@ $totalProdutos = mysqli_num_rows($resultadoProdutos);
 
 
     if ($totalProdutos == 0) {
-        $pesquisaUsuarios = "select 
-        idCliente,
-        nomeCliente,
-        cpf_cnpj,
-        emailCliente,
+        $pesquisaProdutos = "select 
+        idProduto,
+        nomeProduto,
         ativo , 
-        enderecoCliente,
-        atacado,
-        telefoneCliente,
+        dataCadastro,
+        precoProduto,
+        estoque,nomeCategoria,
         dataCadastro 
         from 
-        cliente c order by c.nomeCliente limit $incio, $quantidade_pg";
-        $resultadoUsuarios = mysqli_query($conn, $pesquisaUsuarios);
+        produto p inner join categoriaProduto c on p.categoriaProduto = c.idCategoria order by p.nomeProduto limit $incio, $quantidade_pg";
+        $resultadoUsuarios = mysqli_query($conn, $pesquisaProdutos);
 
         $_SESSION["msg"] = $mensagens["semRegistro"];
     }
@@ -214,10 +214,9 @@ $totalProdutos = mysqli_num_rows($resultadoProdutos);
         <thead>
             <tr>
                 <th>Imagem</th>
-                <th> Código</th>
                 <th> Produto</th>
-                <th> Preço Atacado</th>
-                <th> Preço Delivery</th>
+                <th> Categoria do produto</th>
+                <th> Preço</th>
                 <th> Quantidade em estoque</th>
 
                 <th> Situação</th>
@@ -241,8 +240,7 @@ $totalProdutos = mysqli_num_rows($resultadoProdutos);
                     <th> <?php echo $row["codigo"] ?> </th>
 
                     <th> <?php echo $row["nomeProduto"] ?> </th>
-                    <th> R$ <?php echo number_format($row["precoAtacado"], 2, ",", "."); ?> </th>
-                    <th> R$ <?php echo number_format($row["precoDelivery"], 2, ",", "."); ?> </th>
+                    <th> R$ <?php echo number_format($row["precoProduto"], 2, ",", "."); ?> </th>
 
                     <th> <?php echo $row["estoque"] ?> </th>
                     <?php if ($row["ativo"] == 1) { ?>
@@ -285,23 +283,11 @@ $totalProdutos = mysqli_num_rows($resultadoProdutos);
                                             </div>
                                         </div>
 
-                                        <div class="form-group row">
-                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Código: </label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="codigo" value="<?php echo $row["codigo"] ?>" required>
-                                            </div>
-                                        </div>
 
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Preço atacado</label>
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Preço </label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="precoAtacado" value="R$ <?php echo number_format($row["precoAtacado"], 2, ",", "."); ?>" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Preço delivery</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="precoDelivery" value="R$ <?php echo number_format($row["precoDelivery"], 2, ",", "."); ?>" required>
+                                                <input type="text" class="form-control" name="precoProduto" value="R$ <?php echo number_format($row["precoProduto"], 2, ",", "."); ?>" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -314,7 +300,7 @@ $totalProdutos = mysqli_num_rows($resultadoProdutos);
                                         <div class="form-group row">
                                             <label for="inputEmail3" class="col-sm-3 col-form-label">Variação: </label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="variacao" value="<?php echo $row["unidade"] ?>" required>
+                                                <input type="text" class="form-control" name="variacao" value="<?php echo $row["variacao"] ?>" required>
                                             </div>
                                         </div>
 
@@ -389,26 +375,36 @@ $totalProdutos = mysqli_num_rows($resultadoProdutos);
                                 <input type="text" class="form-control" name="nome" required>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Categoria do produto </label>
+                            <div class="col-sm-10">
+                                <select name="categoria" required>
+                                    <option>Selecione</option>
+                                    <?php
+
+                                    $sql2 = "SELECT * from  categoriaProduto order by nomeCategoria";
+                                    $result2 = $conn->query($sql2);
+
+                                    while ($socio2 = $result2->fetch_assoc()) {
+
+                                    ?>
+                                        <option value="<?php echo $socio2["idCategoria"]; ?>"><?php echo $socio2["nomeCategoria"]; ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+
 
                         <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Código: </label>
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Preço</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="codigo" required>
+                                <input type="text" class="form-control" name="precoProduto" required>
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Preço atacado</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="precoAtacado" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Preço delivery</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="precoDelivery" required>
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-3 col-form-label">Estoque: </label>
                             <div class="col-sm-9">
