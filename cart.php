@@ -23,7 +23,7 @@
 	<script src="themes/js/jquery.scrolltotop.js"></script>
 	<!--[if lt IE 9]>			
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-			<script src="js/respond.min.js"></script>
+			<script src="themes/js/respond.min.js"></script>
 		<![endif]-->
 </head>
 
@@ -77,100 +77,81 @@
 		</section>
 		<section class="header_text sub">
 			<img class="pageBanner" src="themes/images/pageBanner.png" alt="New products">
-			<h4><span>New products</span></h4>
+			<h4><span>Shopping Cart</span></h4>
 		</section>
 		<section class="main-content">
-
 			<div class="row">
 				<div class="span9">
-					<ul class="thumbnails listing-products">
-						<li class="span3">
-							<div class="product-box">
-								<span class="sale_tag"></span>
-								<a href="product_detail.php"><img alt="" src="themes/images/ladies/9.jpg"></a><br />
-								<a href="product_detail.php" class="title">Fusce id molestie massa</a><br />
-								<a href="#" class="category">Phasellus consequat</a>
-								<p class="price">$341</p>
-							</div>
-						</li>
-						<li class="span3">
-							<div class="product-box">
-								<a href="product_detail.php"><img alt="" src="themes/images/ladies/8.jpg"></a><br />
-								<a href="product_detail.php" class="title">Praesent tempor sem</a><br />
-								<a href="#" class="category">Erat gravida</a>
-								<p class="price">$28</p>
-							</div>
-						</li>
-						<li class="span3">
-							<div class="product-box">
-								<span class="sale_tag"></span>
-								<a href="product_detail.php"><img alt="" src="themes/images/ladies/7.jpg"></a><br />
-								<a href="product_detail.php" class="title">Wuam ultrices rutrum</a><br />
-								<a href="#" class="category">Suspendisse aliquet</a>
-								<p class="price">$341</p>
-							</div>
-						</li>
-						<li class="span3">
-							<div class="product-box">
-								<span class="sale_tag"></span>
-								<a href="product_detail.php"><img alt="" src="themes/images/ladies/6.jpg"></a><br />
-								<a href="product_detail.php" class="title">Praesent tempor sem sodales</a><br />
-								<a href="#" class="category">Nam imperdiet</a>
-								<p class="price">$49</p>
-							</div>
-						</li>
-						<li class="span3">
-							<div class="product-box">
-								<a href="product_detail.php"><img alt="" src="themes/images/ladies/1.jpg"></a><br />
-								<a href="product_detail.php" class="title">Fusce id molestie massa</a><br />
-								<a href="#" class="category">Congue diam congue</a>
-								<p class="price">$35</p>
-							</div>
-						</li>
-						<li class="span3">
-							<div class="product-box">
-								<a href="product_detail.php"><img alt="" src="themes/images/ladies/2.jpg"></a><br />
-								<a href="product_detail.php" class="title">Tempor sem sodales</a><br />
-								<a href="#" class="category">Gravida placerat</a>
-								<p class="price">$61</p>
-							</div>
-						</li>
-						<li class="span3">
-							<div class="product-box">
-								<a href="product_detail.php"><img alt="" src="themes/images/ladies/3.jpg"></a><br />
-								<a href="product_detail.php" class="title">Quam ultrices rutrum</a><br />
-								<a href="#" class="category">Orci et nisl iaculis</a>
-								<p class="price">$233</p>
-							</div>
-						</li>
-						<li class="span3">
-							<div class="product-box">
-								<a href="product_detail.php"><img alt="" src="themes/images/ladies/4.jpg"></a><br />
-								<a href="product_detail.php" class="title">Tempor sem sodales</a><br />
-								<a href="#" class="category">Urna nec lectus mollis</a>
-								<p class="price">$134</p>
-							</div>
-						</li>
-						<li class="span3">
-							<div class="product-box">
-								<a href="product_detail.php"><img alt="" src="themes/images/ladies/5.jpg"></a><br />
-								<a href="product_detail.php" class="title">Luctus quam ultrices</a><br />
-								<a href="#" class="category">Suspendisse aliquet</a>
-								<p class="price">$261</p>
-							</div>
-						</li>
-					</ul>
+					<h4 class="title"><span class="text"><strong>Your</strong> Cart</span></h4>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Remove</th>
+								<th>Image</th>
+								<th>Product Name</th>
+								<th>Quantity</th>
+								<th>Unit Price</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><input type="checkbox" value="option1"></td>
+								<td><a href="product_detail.php"><img alt="" src="themes/images/ladies/9.jpg"></a></td>
+								<td>Fusce id molestie massa</td>
+								<td><input type="text" placeholder="1" class="input-mini"></td>
+								<td>$2,350.00</td>
+								<td>$2,350.00</td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" value="option1"></td>
+								<td><a href="product_detail.php"><img alt="" src="themes/images/ladies/1.jpg"></a></td>
+								<td>Luctus quam ultrices rutrum</td>
+								<td><input type="text" placeholder="2" class="input-mini"></td>
+								<td>$1,150.00</td>
+								<td>$2,450.00</td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" value="option1"></td>
+								<td><a href="product_detail.php"><img alt="" src="themes/images/ladies/3.jpg"></a></td>
+								<td>Wuam ultrices rutrum</td>
+								<td><input type="text" placeholder="1" class="input-mini"></td>
+								<td>$1,210.00</td>
+								<td>$1,123.00</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td><strong>$3,600.00</strong></td>
+							</tr>
+						</tbody>
+					</table>
+					<h4>What would you like to do next?</h4>
+					<p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+					<label class="radio">
+						<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+						Use Coupon Code
+					</label>
+					<label class="radio">
+						<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+						Estimate Shipping &amp; Taxes
+					</label>
 					<hr>
-					<div class="pagination pagination-small pagination-centered">
-						<ul>
-							<li><a href="#">Prev</a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">Next</a></li>
-						</ul>
-					</div>
+					<p class="cart-total right">
+						<strong>Sub-Total</strong>: $100.00<br>
+						<strong>Eco Tax (-2.00)</strong>: $2.00<br>
+						<strong>VAT (17.5%)</strong>: $17.50<br>
+						<strong>Total</strong>: $119.50<br>
+					</p>
+					<hr />
+					<p class="buttons center">
+						<button class="btn" type="button">Update</button>
+						<button class="btn" type="button">Continue</button>
+						<button class="btn btn-inverse" type="submit" id="checkout">Checkout</button>
+					</p>
 				</div>
 				<div class="span3 col">
 					<div class="block">
@@ -206,7 +187,7 @@
 										<li class="span3">
 											<div class="product-box">
 												<span class="sale_tag"></span>
-												<img alt="" src="themes/images/ladies/1.jpg"><br />
+												<a href="product_detail.php"><img alt="" src="themes/images/ladies/2.jpg"></a><br />
 												<a href="product_detail.php" class="title">Fusce id molestie massa</a><br />
 												<a href="#" class="category">Suspendisse aliquet</a>
 												<p class="price">$261</p>
@@ -218,7 +199,7 @@
 									<ul class="thumbnails listing-products">
 										<li class="span3">
 											<div class="product-box">
-												<img alt="" src="themes/images/ladies/2.jpg"><br />
+												<a href="product_detail.php"><img alt="" src="themes/images/ladies/4.jpg"></a><br />
 												<a href="product_detail.php" class="title">Tempor sem sodales</a><br />
 												<a href="#" class="category">Urna nec lectus mollis</a>
 												<p class="price">$134</p>
@@ -228,29 +209,6 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="block">
-						<h4 class="title"><strong>Best</strong> Seller</h4>
-						<ul class="small-product">
-							<li>
-								<a href="#" title="Praesent tempor sem sodales">
-									<img src="themes/images/ladies/3.jpg" alt="Praesent tempor sem sodales">
-								</a>
-								<a href="#">Praesent tempor sem</a>
-							</li>
-							<li>
-								<a href="#" title="Luctus quam ultrices rutrum">
-									<img src="themes/images/ladies/4.jpg" alt="Luctus quam ultrices rutrum">
-								</a>
-								<a href="#">Luctus quam ultrices rutrum</a>
-							</li>
-							<li>
-								<a href="#" title="Fusce id molestie massa">
-									<img src="themes/images/ladies/5.jpg" alt="Fusce id molestie massa">
-								</a>
-								<a href="#">Fusce id molestie massa</a>
-							</li>
-						</ul>
 					</div>
 				</div>
 			</div>
@@ -294,6 +252,13 @@
 		</section>
 	</div>
 	<script src="themes/js/common.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#checkout').click(function(e) {
+				document.location.href = "checkout.php";
+			})
+		});
+	</script>
 </body>
 
 </html>
