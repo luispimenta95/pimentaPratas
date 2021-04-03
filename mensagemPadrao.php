@@ -30,6 +30,8 @@ $mensagens = array(
     "atualizarSenhaHost" => "<div class='alert alert-success'> Senha alterada com sucesso, seu usuário está liberado para acessar o sistema ! </div>",
     "erroEmailDivergergente" => "<div class='alert alert-danger'> O campo email é divergente do email cadastrado no sistema, por favor tente novamente ! </div>",
     "atualizarEsqueceuSenha" => "<div class='alert alert-success'> Dados atualizados com sucesso, para acessar o sistema , por favor realize o login ! </div>",
+    "definirCapa" => "<div class='alert alert-success'>Capa definida com sucesso. </div>",
+    "cadastroImagem" => "<div class='alert alert-success'> Imagem (ns) cadastrada(s) com sucesso. </div>",
 
 
 

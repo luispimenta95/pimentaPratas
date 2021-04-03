@@ -26,7 +26,7 @@ if (!is_dir($diretorio)) {
 
     if ($conn->query($sql_code) === TRUE) {
 
-      $_SESSION['msg'] = $mensagens["cadastro"];
+      $_SESSION['msg'] = $mensagens["cadastroImagem"];
 
       header("Location:produto.php");
     } else {

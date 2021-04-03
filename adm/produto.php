@@ -33,6 +33,8 @@ if (isset($_POST['todos'])) {
     idProduto,
     nomeProduto,
     ativo , 
+    promocao,
+    txDesconto,
     dataCadastro,
     precoProduto,
     estoque,
@@ -45,7 +47,9 @@ if (!isset($_POST['termo'])) {
     $pesquisaProdutos = "select 
     idProduto,
     nomeProduto,
-    ativo , 
+    ativo ,
+    promocao,
+    txDesconto, 
     dataCadastro,
     precoProduto,
     estoque,
@@ -60,6 +64,8 @@ if (!isset($_POST['termo'])) {
     idProduto,
      nomeProduto,
      ativo,
+     promocaos,
+    txDesconto,
     dataCadastro,
     precoProduto, 
     estoque,
@@ -190,7 +196,9 @@ $totalProdutos = mysqli_num_rows($resultadoProdutos);
         $pesquisaProdutos = "select 
         idProduto,
         nomeProduto,
-        ativo , 
+        ativo ,
+        promocao,
+        txDesconto, 
         dataCadastro,
         precoProduto,
         estoque,nomeCategoria,
@@ -216,6 +224,7 @@ $totalProdutos = mysqli_num_rows($resultadoProdutos);
                 <th> Produto</th>
                 <th> Categoria do produto</th>
                 <th> Preço</th>
+                <th> Desconto ativo ? </th>
                 <th> Quantidade em estoque</th>
 
                 <th> Situação</th>
@@ -238,7 +247,16 @@ $totalProdutos = mysqli_num_rows($resultadoProdutos);
                     <th> <?php echo $row["nomeCategoria"] ?> </th>
 
                     <th> R$ <?php echo number_format($row["precoProduto"], 2, ",", "."); ?> </th>
+                    <?php if ($row["promocao"] == 0) { ?>
+                        <th> Não </th>
+                    <?php } else {
+                        $desconto = $row["precoProduto"] - $row["precoProduto"] * $row["txDesconto"] / 100;
 
+
+                    ?>
+                        <th> Produto com <?php echo $row["txDesconto"] ?> % de desconto custando R$ <?php echo number_format($desconto, 2, ",", "."); ?> </th>
+
+                    <?php } ?>
                     <th> <?php echo $row["estoque"] ?> </th>
                     <?php if ($row["ativo"] == 1) { ?>
                         <th> Produto disponível</th>
