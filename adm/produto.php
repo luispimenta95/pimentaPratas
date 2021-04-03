@@ -213,7 +213,6 @@ $totalProdutos = mysqli_num_rows($resultadoProdutos);
 
         <thead>
             <tr>
-                <th>Imagem</th>
                 <th> Produto</th>
                 <th> Categoria do produto</th>
                 <th> Preço</th>
@@ -233,13 +232,11 @@ $totalProdutos = mysqli_num_rows($resultadoProdutos);
             while ($row = mysqli_fetch_assoc($resultadoProdutos)) { ?>
 
                 <tr>
-                    <th>
-                        <img class="img-fluid img-thumbnail" src="Imagens_produto/<?php echo $row['imagem']; ?>" alt="Imagem de capa do produto">
-
-                    </th>
-                    <th> <?php echo $row["codigo"] ?> </th>
 
                     <th> <?php echo $row["nomeProduto"] ?> </th>
+
+                    <th> <?php echo $row["nomeCategoria"] ?> </th>
+
                     <th> R$ <?php echo number_format($row["precoProduto"], 2, ",", "."); ?> </th>
 
                     <th> <?php echo $row["estoque"] ?> </th>
@@ -252,8 +249,124 @@ $totalProdutos = mysqli_num_rows($resultadoProdutos);
 
                     <th>
                         <a href="#edicao<?php echo $row["idProduto"] ?>" data-toggle="modal"><button type='button' class='btn btn-primary btn-sm'><i class="fa fa-pencil"></i> </button></a>
+                        <a href="#verGaleria<?php echo $row["idProduto"] ?>" data-toggle="modal"><button type='button' class='btn btn-default btn-sm'><span class='fa fa-camera' aria-hidden='true'></span></button></a>
+                        <a href="#novaImagem<?php echo $row["idProduto"] ?>" data-toggle="modal"><button type='button' class='btn btn-default btn-sm'><span class='fa fa-plus' aria-hidden='true'></span></button></a>
 
                     </th>
+                    <div id="verGaleria<?php echo $row["idProduto"] ?>" class="modal fade" role="dialog" class="form-group">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Ver imagens de um produto</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <?php
+                                    $pesquisaImagens = "SELECT * from imagens i  where i.produto = " . $row["idProduto"];
+                                    $imagens = mysqli_query($conn, $pesquisaImagens);
+
+                                    //Contar o total de logs
+                                    $totalImagens = mysqli_num_rows($imagens);
+
+                                    if ($totalImagens == 0) {
+
+                                        echo "Não existem imagens cadastradas para essa obra";
+                                    }
+
+
+
+                                    ?>
+
+
+                                    <div class="row">
+
+                                        <?php
+                                        $result_logs = "SELECT * from imagens i  where i.produto = " . $row["idProduto"];
+                                        $resultado_logs = mysqli_query($conn, $result_logs);
+                                        $totalImagens = mysqli_num_rows($resultado_logs);
+                                        $marcadores = 0;
+                                        while ($lista = mysqli_fetch_assoc($resultado_logs)) { ?>
+                                            <form action="updateCapa.php?id=<?php echo $row["idProduto"]; ?>" method="POST" enctype="multipart/form-data">
+
+                                                <div class="col-md-4">
+                                                    <div>
+
+                                                        <img src="../Imagens/<?php echo $lista["imagem"] ?>" alt="Lights" style="width:100%">
+                                                        <div class="caption">
+                                                            <?php
+                                                            if ($lista["capa"] == 0) { ?>
+
+                                                                <a href="updateCapa.php?id=<?php echo $lista["idImagem"] ?>&&idProduto=<?php echo $row["idProduto"]; ?>"" onclick=" return confirm('Deseja realmente definir como capa ?')"> <button type="button" class="btn btn-primary btn-xs">Definir como capa</button></a>
+                                                                <a href="excluirImagem.php?idImagem=<?php echo $lista["idImagem"] ?> " onclick="return confirm('Deseja realmente excluir o registro ?')"><button type="button" class="btn btn-danger btn-xs">Excluir imagem</button></a>
+                                                                <?php } else {
+
+                                                                if ($totalImagens > 1 && $lista["capa"] == 0) { ?>
+                                                                    <a href="excluirImagem.php?id=<?php echo $lista["idImagem"] ?>"" onclick=" return confirm('Deseja realmente excluir o registro ?')"><button type="button" class="btn btn-danger btn-xs">Excluir imagem</button></a>
+
+
+                                                                <?php } else { ?>
+                                                                    <p> Essa imagem está definida como capa </p>
+                                                            <?php }
+                                                            } ?>
+
+                                                            <input type="hidden" name="obra" value="<?php echo $row["idProduto"] ?>">
+                                                        </div>
+                                                        </a>
+
+                                                    </div>
+
+                                                </div>
+                                            </form>
+
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+
+                                    <button type="submit" class=" btn btn-primary" data-dismiss="modal">Voltar</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <form action="imagemProduto.php?id=<?php echo $row["idProduto"]; ?>" method="POST" enctype="multipart/form-data">
+
+
+                        <div id="novaImagem<?php echo $row["idProduto"] ?>" class="modal fade" role="dialog" class="form-group">
+
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                        <h4 class="modal-title">Cadastro de imagens</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+
+                                            <input type="file" id="exampleInputEmail1" name="arquivo[]" multiple="multiple" required>
+
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="modal-footer">
+                                        <button type="submit" class=" btn btn-primary">Realizar cadastro</button>
+
+                                        <button type="submit" class=" btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </form>
                     <form action="updateProduto.php?id=<?php echo $row["idProduto"]; ?>" method="POST" class="form-group" enctype="multipart/form-data">
 
                         <div id="edicao<?php echo $row["idProduto"] ?>" class="modal fade" role="dialog" class="form-group">
@@ -401,7 +514,7 @@ $totalProdutos = mysqli_num_rows($resultadoProdutos);
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Preço</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="precoProduto" required>
+                                <input type="text" class="form-control" name="preco" required>
                             </div>
                         </div>
 
