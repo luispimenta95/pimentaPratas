@@ -38,6 +38,7 @@ if (isset($_POST['todos'])) {
     dataCadastro,
     precoProduto,
     estoque,
+    variacao,
     nomeCategoria,
     dataCadastro 
     from 
@@ -53,6 +54,7 @@ if (!isset($_POST['termo'])) {
     dataCadastro,
     precoProduto,
     estoque,
+    variacao,
     nomeCategoria,
     dataCadastro 
     from 
@@ -66,6 +68,7 @@ if (!isset($_POST['termo'])) {
      ativo,
      promocaos,
     txDesconto,
+    variacao,
     dataCadastro,
     precoProduto, 
     estoque,
@@ -198,6 +201,7 @@ $totalProdutos = mysqli_num_rows($resultadoProdutos);
         nomeProduto,
         ativo ,
         promocao,
+        variacao,
         txDesconto, 
         dataCadastro,
         precoProduto,
