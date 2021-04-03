@@ -12,10 +12,10 @@ if (isset($_SESSION["idAdministrador"])) {
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Legrano Orgânicos</title>
+	<title>Pimenta pratas</title>
 	<link rel="shortcut icon" href="imagens/icon.jpg" type="image/x-icon" />
-	<link href="css/bootstrap.css" rel="stylesheet">
-	<link href="css/signin.css" rel="stylesheet">
+	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link href="bootstrap/css/signin.css" rel="stylesheet">
 </head>
 
 <body>
@@ -36,7 +36,7 @@ if (isset($_SESSION["idAdministrador"])) {
 				<!--<label>Senha</label>-->
 				<input type="password" name="senha" placeholder="Digite a sua senha" class="form-control"><br>
 
-				<input type="submit" name="btnLogin" value="Acessar" class="btn btn-default btn-block">
+				<input type="submit" name="btnLogin" value="Acessar" class="btn btn-default">
 
 
 
